@@ -1,17 +1,24 @@
 version: 2.1
-orbs:
-  node: circleci/node@1.1.6
+
 jobs:
   build-and-test:
-    executor:
-      name: node/default
+    docker:
+      - image: circleci/node[latest]
+      - image: circleci/mongo[latest]
     steps:
       - checkout
       - node/with-cache:
           steps:
             - run: npm install
             - run: npm run build
-            - run: npm run start & npm run test
+            - run:
+              name: Wait for Mongo to start
+              command: dockerize -wait tcp://127.0.0.1:27017 -timeout 120s
+            - run:
+              name: Running server in background
+              command: npm run start
+              background: true
+            - run: npm run test
 workflows:
     build-and-test:
       jobs:
