@@ -25,7 +25,6 @@ import {
   VoteDown,
   VoteFunny,
   VoteInfo,
-  Break,
 } from './styles/ReviewEntry.jsx';
 
 const ReviewEntry = (props) => {
@@ -59,7 +58,6 @@ const ReviewEntry = (props) => {
       setHelpful(false);
       updateVote(e.target.id, value, review.user.id);
     }
-
   };
 
   return (

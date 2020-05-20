@@ -10,9 +10,9 @@ const request = supertest(app);
 const databaseName = 'steamy';
 
 // connect to db
-beforeAll(async () => {
+beforeAll(() => {
   const url = `mongodb://127.0.0.1/${databaseName}`;
-  await mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
+  mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 });
 
 // test get request on server
@@ -22,7 +22,6 @@ describe('Test the GET routes', () => {
     expect(res.statusCode).toBe(200);
     done();
   });
-
   // test get route to database with fake data
   test('Should find items in database', async (done) => {
     const res = await request.get('/api/reviews/1')
@@ -42,4 +41,8 @@ describe('Test the PATCH routes', () => {
     expect(res.statusCode).toBe(204);
     done();
   });
+});
+
+afterAll(() => {
+  mongoose.connection.close();
 });

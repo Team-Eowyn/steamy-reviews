@@ -26,5 +26,4 @@ describe('Renders components successfully', () => {
   test('loads ReviewEntry component', () => {
     expect(shallow(<ReviewEntry review={exampleData[0]} />).exists()).toBe(true);
   });
-
 });
