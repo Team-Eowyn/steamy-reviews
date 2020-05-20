@@ -10,13 +10,13 @@ import {
 import Reviews from '../components/Reviews';
 import ReviewList from '../components/ReviewList';
 import ReviewEntry from '../components/ReviewEntry';
-
+import Title from '../components/styles/styles.jsx';
 import exampleData from './reviews.example';
 
 describe('Renders components successfully', () => {
   test('should render the Reviews component', () => {
     mount(<Reviews />);
-    expect(shallow(<Reviews />).find('.left-col').exists()).toBe(true);
+    expect(shallow(<Reviews />).containsMatchingElement(<Title />)).toEqual(true);
   });
 
   test('loads ReviewList component', () => {
