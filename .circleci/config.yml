@@ -16,3 +16,5 @@ jobs:
           command: npm run start
           background: true
       - run: npm run test
+      - store_test_results:
+          path: test-results
