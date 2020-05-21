@@ -1,15 +1,9 @@
 # Reviews
-This is the Reviews component for the Front End Capstone done at Hack Reactor. Our team replicated the Steam website, and this is a simplified version of the reviews module for a sample game.
+This is the Reviews component for the System Design Capstone done at Hack Reactor.
 
 This app:
 * renders and append review data to the page
 * incorporates UI with each review like linking to the full review or showing profile data
-
-*Future Updates*
-* Profile achievements
-* right column bar with recent reviews
-* filter function for reviews
-* user input for own review
 
 ## Getting Started
 
@@ -31,14 +25,11 @@ npm run test
 * [express](https://expressjs.com/) - web framework used
 * [mongoose](https://mongoosejs.com/) - ORM for database
 
-## Authors
+## CRUD
 
-* **Joshua Kim** - *Initial work* - [joshskkim](https://github.com/joshskkim)
-
-* *See also the rest of the modules done by our team!*
-* **FEC-Team Gandalf** (https://github.com/Team-Gandalf)
-
-
-* **Haider Syed** - *Sidebar and Body component* (https://github.com/Team-Gandalf/sidebar-body-related) - [sfshaider](https://github.com/sfshaider)
-* **Brian Hampton** - *Media component* (https://github.com/Team-Gandalf/Media) - [BHamp](https://github.com/BHamp)
-* **Sajjan Raj Vaidya** - *Announcements component* (https://github.com/Team-Gandalf/announcements) - [sajjanrajvaidya](https://github.com/sajjanrajvaidya)
+| Http Verbs | Endpoint         | Action                            |
+|------------|------------------|-----------------------------------|
+| POST       | /api/reviews/    | Creates a review for 1 game       |
+| GET        | /api/reviews/:id | Gets a list of reviews for 1 game |
+| PUT        | /api/reviews/:id | Updates a review for 1 game       |
+| DELETE     | /api/reviews/:id | Deletes all reviews for 1 game    |
