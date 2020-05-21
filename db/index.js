@@ -81,6 +81,25 @@ const find = (inputGame, callback) => {
   });
 };
 
+const updateAll = (id, data, callback) => {
+  Review.findOneAndUpdate({ id, 'user.id': data.id }, {
+    game: data.game,
+    game_reviews: data.game_reviews,
+    rating: data.rating,
+    hours: data.hours,
+    description: data.description,
+    helpful: data.helpful,
+    funny: data.funny,
+    date_posted: data.date_posted,
+    language: data.language,
+    thread_length: data.thread_length,
+    user: data.user,
+  },
+  (err, res) => {
+    callback(err, res);
+  });
+};
+
 const update = (gameId, reviewId, field, value, callback) => {
   if (field === 'helpful') {
     Review.findOneAndUpdate({ id: gameId, 'user.id': reviewId }, { helpful: value }, (err, res) => {
@@ -93,7 +112,39 @@ const update = (gameId, reviewId, field, value, callback) => {
   }
 };
 
+const create = (data, callback) => {
+  console.log(data);
+  Review.create({
+    id: data.id,
+    game: data.game,
+    game_reviews: data.game_reviews,
+    rating: data.rating,
+    hours: data.hours,
+    description: data.description,
+    helpful: data.helpful,
+    funny: data.funny,
+    date_posted: data.date_posted,
+    language: data.language,
+    thread_length: data.thread_length,
+    user: data.user,
+  },
+  (err, res) => {
+    callback(err, res);
+  });
+};
+
+
+const destroy = (gameId, callback) => {
+  Review.deleteMany({ id: gameId }, (err, results) => {
+    callback(err, results);
+  });
+};
+
 module.exports.update = update;
 module.exports.save = save;
 module.exports.find = find;
+module.exports.create = create;
+module.exports.delete = destroy;
+module.exports.updateAll = updateAll;
+
 module.exports.Review = Review;
