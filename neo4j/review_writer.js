@@ -2,11 +2,11 @@ const faker = require('faker');
 const fs = require('fs');
 const writeOpts = {highWaterMark: 2 ** 16 }; // 65536
 
-const writeGames = fs.createWriteStream('./games.csv', writeOpts);
+const writeGames = fs.createWriteStream('./neo4j/games.csv', writeOpts);
 writeGames.write('id:ID(Game),game_id,currentGame,reviewCount\n', 'utf8')
 
-const writeReviews = fs.createWriteStream('./reviews.csv', writeOpts);
-writeReviews.write('id:ID(Review),review_id,game_id,game_reviews,rating,hours,helpful,funny,date_posted,thread_length,user_id\n', 'utf8');
+const writeReviews = fs.createWriteStream('./neo4j/reviews.csv', writeOpts);
+writeReviews.write('id:ID(Review),review_id,game_id,game_reviews,rating,hours,description,helpful,funny,date_posted,thread_length,user_id\n', 'utf8');
 
 
 
@@ -26,7 +26,7 @@ function writeReviewsForEachGame(count, game_id) {
       const date_posted = faker.date.past();
       const thread_length = faker.random.number(50);
       const user_id = faker.random.number(100000);
-      data += `${reviewIds},${review_id},${game_id},${count},${rating},${hours},${description}${helpful},${funny},${date_posted},${thread_length},${user_id}\n`;
+      data += `${reviewIds},${review_id},${game_id},${count},${rating},${hours},${description},${helpful},${funny},${date_posted},${thread_length},${user_id}\n`;
       console.log(`Review # ${reviewIds} successfully written.`);
   }
   writeReviews.write(data);
