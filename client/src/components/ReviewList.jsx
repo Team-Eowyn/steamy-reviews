@@ -11,9 +11,13 @@ const ReviewList = (props) => {
 
   return (
     <ReviewBox>
-      {allReviews.map((review) => {
-        return <ReviewEntry review={review} key={review.user.id} updateVote={handleVote} />;
-      })}
+      {allReviews.map((review) => (
+        <ReviewEntry
+          review={review}
+          key={review.user.user_id}
+          updateVote={handleVote}
+        />
+      ))}
     </ReviewBox>
   );
 };
