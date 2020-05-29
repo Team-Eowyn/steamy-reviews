@@ -46,23 +46,23 @@ const ReviewEntry = (props) => {
     if (e.target.id === 'voteFunny' && funny === false) {
       value = review.funny;
       setFunny(true);
-      updateVote(e.target.id, value, review.user.id);
+      updateVote(e.target.id, value, review.review_id);
     }
 
     if (e.target.id === 'voteUp' && helpful === false) {
       setHelpful(true);
-      updateVote(e.target.id, value, review.user.id);
+      updateVote(e.target.id, value, review.review_id);
     }
 
     if (e.target.id === 'voteDown' && helpful === true) {
       setHelpful(false);
-      updateVote(e.target.id, value, review.user.id);
+      updateVote(e.target.id, value, review.review_id);
     }
   };
 
   return (
     <Review>
-      <ReviewProfile user={review.user} key={review.user.id} />
+      <ReviewProfile user={review.user} key={review.user.user_id} />
       <ReviewContent>
         <VoteHeader>
           <TooltipText>See Full Review</TooltipText>

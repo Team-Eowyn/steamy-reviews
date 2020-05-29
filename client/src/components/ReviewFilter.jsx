@@ -10,7 +10,6 @@ import {
   ReviewTypeTitle,
   ReviewTypeMenu,
   ReviewTypeContent,
-  Input,
   Label,
 } from './styles/FilterBar.jsx';
 
