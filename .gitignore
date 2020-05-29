@@ -104,7 +104,7 @@ dist
 .tern-port
 
 #Secrets
-keys/
+keys.js
 
 #CSV
 *.csv
