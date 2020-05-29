@@ -105,3 +105,9 @@ dist
 
 #Secrets
 keys/
+
+#CSV
+*.csv
+
+#DSSTORE
+.DS_Store

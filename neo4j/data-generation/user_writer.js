@@ -24,7 +24,7 @@ function writeOneHundredThousandUsers(writer, encoding, callback) {
       const xp = faker.random.number(1000);
       const friend_level = faker.random.number(50);
       const steam_level = faker.random.number(1000);
-      const data = `${id},${user_id},${username},${recommended},${steam_purchaser},${numProducts},${numReviews},${icon},${player_type},${xp},${friend_level}, ${steam_level}\n`;
+      const data = `${id},${user_id},${username},${recommended},${steam_purchaser},${numProducts},${numReviews},${icon},${player_type},${xp},${friend_level},${steam_level}\n`;
       console.log(`User # ${id} of ${i} users successfully written.`);
       if (i === 0) {
         writer.write(data, encoding, callback);
@@ -40,6 +40,5 @@ function writeOneHundredThousandUsers(writer, encoding, callback) {
 }
 
 writeOneHundredThousandUsers(writeUsers, 'utf-8', () => {
-  writeReviews.end();
   writeUsers.end();
 });
