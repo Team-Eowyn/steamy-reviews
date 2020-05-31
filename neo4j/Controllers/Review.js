@@ -1,7 +1,8 @@
 /* eslint-disable camelcase */
-const session = require('../index.js');
+const driver = require('../index.js');
 
 const getReviewsForId = (req, res) => {
+  const session = driver.session();
   const cypher = `MATCH (u:User)-[]-(r:Review)-[]-(g:Game)
                   WHERE g.game_id =${req.params.id}
                   RETURN g, r{.*, user: u}`;
@@ -13,15 +14,19 @@ const getReviewsForId = (req, res) => {
         review.user = review.user.properties;
         results.push(review);
       });
+      session.close();
       res.status(200).send(results);
     })
     .catch((error) => {
+      session.close();
       console.error(error);
       res.status(500).send('Error retreiving reviews from database');
     });
 };
 
 const createReview = (req, res) => {
+  const session = driver.session();
+
   const {
     hours,
     user_id,
@@ -45,36 +50,45 @@ const createReview = (req, res) => {
                   return s, g, u, r`;
   session.run(cypher)
     .then(() => {
+      session.close();
       res.status(200).send('Review created');
     })
     .catch((error) => {
+      session.close();
       console.error(error);
       res.status(500).send('Error creating review.');
     });
 };
 
 const updateUpvote = (req, res) => {
+  const session = driver.session();
+
   const cypher = `MATCH (r:Review) WHERE r.review_id=${req.body.reviewId} 
                   SET r.${req.body.field}=${req.body.value}
                   Return r`;
   session.run(cypher)
     .then((result) => {
+      session.close();
       res.status(200).send(result);
     })
     .catch((error) => {
+      session.close();
       console.error(error);
       res.status(500).send('Error updating upvote in database');
     });
 };
 
 const deleteReview = (req, res) => {
+  const session = driver.session();
   const cypher = `MATCH (r:Review { review_id: ${req.params.id} })
                   DETACH DELETE n`;
   session.run(cypher)
     .then(() => {
+      session.close();
       res.status(200).send('Successfully deleted review.');
     })
     .catch((error) => {
+      session.close();
       console.error(error);
       res.status(500).send('Error deleting review from database');
     });
