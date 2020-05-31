@@ -1,0 +1,51 @@
+config:
+    target: "http://localhost:4200"
+    processor: "./artillerygen.js"
+    phases:
+
+      - duration: 10
+        arrivalRate: 1
+        maxVusers: 1
+        name: "warmup"
+
+      - pause: 30
+
+      - duration: 60
+        arrivalRate: 10
+        maxVusers: 10
+        name: "10 users"
+
+      - pause: 30
+
+      - duration: 60
+        arrivalRate: 100
+        maxVusers: 100
+        name: "100 users"
+
+      - pause: 60
+
+      - duration: 120
+        arrivalRate: 300
+        maxVusers: 10000
+        name: "10000 user load"
+
+scenarios:
+  - name: "Testing GET"
+    weight: 80
+    flow:
+    - function: "generateId"
+    - get:
+        url: "/api/reviews/{{id}}"
+
+  - name: "Testing POST"
+    weight: 20
+    flow:
+    - function: "generateReview"
+    - post:
+        url: "/api/reviews/{{id}}"
+        json:
+          user_id: "{{user_id}}"
+          hours: "{{hours}}"
+          rating: "{{rating}}"
+          description: "{{description}}"
+    - log: "User #{{user_id}} created a new review at Game ID {{id}}. Hours:{{hours}}, Rating:{{rating}} Description:{{description}}"
